@@ -1,5 +1,4 @@
 import Sequelize, { Model } from 'sequelize';
-
 import bcrypt from 'bcryptjs';
 
 export default class User extends Model {
@@ -22,6 +21,12 @@ export default class User extends Model {
       }
     });
     return this;
+  }
+
+  static associate(models) {
+    this.belongsTo(models.File, {
+      foreignKey: 'avatar_id',
+    });
   }
 
   checkPassword(password) {
